@@ -8,10 +8,12 @@ The only limitation is that the maximum packet length is 255 and the type field 
 #Usage
 
 ## Instantiate the object:
+```
 #include <TLVReceiver.h>
 TLVReceiver tlvr;
-
+```
 ## Register the callback
+```
 void packetReady(byte type, byte length, byte value[])
 {
   Serial.print("type: " + String(type) + ": length: " + String(length)  + " value: ");
@@ -26,8 +28,11 @@ void packetReady(byte type, byte length, byte value[])
 void setup() {
   tlvr.setCallback(&packetReady);
 }
-
+```
 ## Pass bytes from the sender that should respect the TLV format
-
-if(someSerialConnection.available())
+```
+void loop() {
+  if(someSerialConnection.available())
     tlvr.addByte(someSerialConnection.read());
+}
+```
